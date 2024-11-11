@@ -28,7 +28,23 @@ public class CalculateServiceTest
     {
         CalculateService calculateService = new();
         Action action = () => calculateService.Divide(1, 0);
-        Assert.Throws<ArgumentException>(action);
+        Assert.Throws<DivideException>(action);
+    }
+
+    [Fact]
+    public void Divide_ShoulDivide()
+    {
+        CalculateService calcService = new();
+        int response = calcService.Divide(4, 2);
+        Assert.Equal(2, response);
+    }
+
+    [Fact]
+    public void Multiplication_ShuldMultiplicationTwoInteger_When_HaveToInteger()
+    {
+        CalculateService calcService = new();
+        int response = calcService.Multiplication(8, 2);
+        Assert.Equal(16, response);
     }
 
 

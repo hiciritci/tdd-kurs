@@ -13,6 +13,11 @@ public class CalculateService
         };
         return x / y;
     }
+
+    public int Multiplication(int x, int y)
+    {
+        return x * y;
+    }
 }
 
 public sealed class DivideException : Exception
