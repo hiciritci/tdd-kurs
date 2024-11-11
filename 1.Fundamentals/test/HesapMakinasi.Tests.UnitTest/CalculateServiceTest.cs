@@ -1,6 +1,5 @@
 using HesapMakinasi;
-
-namespace TestProject1;
+namespace CalculateServiceTest;
 
 public class CalculateServiceTest
 {
@@ -8,12 +7,18 @@ public class CalculateServiceTest
     public void Add_ShouldSumdTwoInteger_When_HaveTwoInteger()
     {
         CalculateService service = new();
-        var response = service.Add(1, 2);
+        int response = service.Add(1, 2);
 
-        Assert.Equal(response,3);
-        Assert.NotEqual(response,4);    
-        Assert.NotNull(response);    
+        Assert.Equal(3, response);
+        Assert.NotEqual(4, response);
+    }
 
-        
+    [Fact]
+    public void Subtract_ShouldSubtractTwoInteger_When_HaveToInteger()
+    {
+        CalculateService service = new();
+        int response = service.Subtract(3, 1);
+        Assert.Equal(2, response);
+
     }
 }
