@@ -21,4 +21,15 @@ public class CalculateServiceTest
         Assert.Equal(2, response);
 
     }
+
+
+    [Fact]
+    public void Divide_ShouldThrowArgumentException_When_SecondParamaterValueýfZero()
+    {
+        CalculateService calculateService = new();
+        Action action = () => calculateService.Divide(1, 0);
+        Assert.Throws<ArgumentException>(action);
+    }
+
+
 }

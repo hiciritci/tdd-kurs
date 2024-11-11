@@ -9,8 +9,16 @@ public class CalculateService
     {
         if (y == 0)
         {
-            throw new ArgumentException("0 Bölünemez !");
+            throw new DivideException();
         };
         return x / y;
+    }
+}
+
+public sealed class DivideException : Exception
+{
+    public DivideException() : base("0 Bölünemez !")
+    {
+
     }
 }
