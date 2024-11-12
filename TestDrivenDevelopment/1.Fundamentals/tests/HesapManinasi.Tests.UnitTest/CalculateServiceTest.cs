@@ -1,13 +1,12 @@
 ﻿using HesapMakinasi;
 
 namespace HesapManinasi.Tests.UnitTest;
-public sealed class CalculateServiceTest
+public sealed class CalculateServiceTest : IClassFixture<CalculateServiceFixture> //Bir kere çalışıyor her metot için ayrı ayrı servisi tetiklemiyor.
 {
-    private readonly CalculateService calculateService;
-
-    public CalculateServiceTest()
+    private readonly CalculateService _sut;
+    public CalculateServiceTest(CalculateServiceFixture fixture)
     {
-        calculateService = new();
+        _sut = fixture.calculateService;
     }
 
     [Fact]
@@ -17,7 +16,7 @@ public sealed class CalculateServiceTest
         //CalculateService calculateService = new();
 
         // Act
-        int response = calculateService.Add(1, 2);
+        int response = _sut.Add(1, 2);
 
         // Assert
         Assert.Equal(3, response);
@@ -27,7 +26,7 @@ public sealed class CalculateServiceTest
     [Fact]
     public void Subtract_ShouldSubtractTwoInteger_When_HaveToInteger()
     {
-        int response = calculateService.Subtract(3, 1);
+        int response = _sut.Subtract(3, 1);
 
         Assert.Equal(2, response);
     }
@@ -35,7 +34,7 @@ public sealed class CalculateServiceTest
     [Fact]
     public void Divide_ShouldThrowArgumentException_When_SecondParameterValueIfZero()
     {
-        Action action = () => calculateService.Divide(1, 0);
+        Action action = () => _sut.Divide(1, 0);
 
         Assert.Throws<DivideException>(action);
     }
@@ -43,14 +42,14 @@ public sealed class CalculateServiceTest
     [Fact]
     public void Divide_ShouldDivideTwoInteger_When_HaveTwoInteger()
     {
-        int response = calculateService.Divide(4, 2);
+        int response = _sut.Divide(4, 2);
         Assert.Equal(2, response);
     }
 
     [Fact]
     public void Multiply_ShouldMultiplyTwoInteger_When_HaveTwoInteger()
     {
-        int response = calculateService.Multiply(2, 3);
+        int response = _sut.Multiply(2, 3);
         Assert.Equal(6, response);
     }
 
