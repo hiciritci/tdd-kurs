@@ -1,7 +1,8 @@
 ﻿using HesapMakinasi;
 
 namespace HesapManinasi.Tests.UnitTest;
-public sealed class CalculateServiceTest : IClassFixture<CalculateServiceFixture> //Bir kere çalışıyor her metot için ayrı ayrı servisi tetiklemiyor.
+public sealed class CalculateServiceTest : IClassFixture<CalculateServiceFixture>
+//Bir kere çalışıyor her metot için ayrı ayrı servisi tetiklemiyor.
 {
     private readonly CalculateService _sut;
     public CalculateServiceTest(CalculateServiceFixture fixture)
@@ -9,18 +10,23 @@ public sealed class CalculateServiceTest : IClassFixture<CalculateServiceFixture
         _sut = fixture.calculateService;
     }
 
-    [Fact]
-    public void Add_ShouldSumTwoInteger_When_HaveTwoInteger()
+
+    [Theory]
+    [InlineData(1, 2, 3)]
+    [InlineData(3, 5, 8)]
+    [InlineData(8, 2, 10)] /// AYnı metotdu test ederken her sefreinde farklı servis yazmak yerine bu şekilde farklı datalar gönderebiliriz. InlineData
+
+    public void Add_ShouldSumTwoInteger_When_HaveTwoInteger(int x, int y, int excepted)
     {
         //// Arrange
         //CalculateService calculateService = new();
 
         // Act
-        int response = _sut.Add(1, 2);
+        int response = _sut.Add(x, y);
 
         // Assert
-        Assert.Equal(3, response);
-        Assert.NotEqual(4, response);
+        Assert.Equal(excepted, response);
+        Assert.NotEqual(excepted + 1, response);
     }
 
     [Fact]
