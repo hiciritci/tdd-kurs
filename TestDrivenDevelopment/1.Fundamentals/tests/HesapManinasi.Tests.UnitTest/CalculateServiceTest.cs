@@ -14,7 +14,8 @@ public sealed class CalculateServiceTest : IClassFixture<CalculateServiceFixture
     [Theory]
     [InlineData(1, 2, 3)]
     [InlineData(3, 5, 8)]
-    [InlineData(8, 2, 10)] /// AYnı metotdu test ederken her sefreinde farklı servis yazmak yerine bu şekilde farklı datalar gönderebiliriz. InlineData
+    [InlineData(8, 2, 10)]
+    /// Aynı metotdu test ederken her sefreinde farklı servis yazmak yerine bu şekilde farklı datalar     gönderebiliriz. InlineData
 
     public void Add_ShouldSumTwoInteger_When_HaveTwoInteger(int x, int y, int excepted)
     {
