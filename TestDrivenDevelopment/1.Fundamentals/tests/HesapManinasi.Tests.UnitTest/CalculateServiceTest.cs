@@ -46,11 +46,15 @@ public sealed class CalculateServiceTest : IClassFixture<CalculateServiceFixture
         Assert.Throws<DivideException>(action);
     }
 
-    [Fact]
-    public void Divide_ShouldDivideTwoInteger_When_HaveTwoInteger()
+
+    [Theory]
+    [InlineData(4, 2, 2)]
+    [InlineData(10, 0, 0, Skip = "Sıfıra bölünenemez! Bu test atlandı..")]
+    [InlineData(8, 2, 4)]
+    public void Divide_ShouldDivideTwoInteger_When_HaveTwoInteger(int x, int y, int excepced)
     {
-        int response = _sut.Divide(4, 2);
-        Assert.Equal(2, response);
+        int response = _sut.Divide(x, y);
+        Assert.Equal(excepced, response);
     }
 
     [Fact]
