@@ -1,5 +1,4 @@
 using HesapMakinasi;
-
 namespace TestProject1;
 
 public class CalculateServiceTest
@@ -10,10 +9,10 @@ public class CalculateServiceTest
         CalculateService service = new();
         var response = service.Add(1, 2);
 
-        Assert.Equal(response,3);
-        Assert.NotEqual(response,4);    
-        Assert.NotNull(response);    
+        Assert.Equal(response, 3);
+        Assert.NotEqual(response, 4);
+        Assert.NotNull(response);
 
-        
+
     }
 }
