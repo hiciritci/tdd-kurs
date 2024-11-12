@@ -10,6 +10,12 @@ public sealed class CalculateServiceTest : IClassFixture<CalculateServiceFixture
         _sut = fixture.calculateService;
     }
 
+    public static IEnumerable<object[]> Data = new List<object[]>()
+    {
+        new object[]{ 2, 3, 5 },
+        new object[]{ 3, 5, 8 },
+    };
+
 
     [Theory]
     [InlineData(1, 2, 3)]
