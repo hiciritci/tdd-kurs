@@ -49,4 +49,52 @@ public class ValueSamplesTest
         dateOfBirt.Should().Be(new(1993, 01, 07));
         // dateOfBirt.Should().BeAfter
     }
+
+    [Fact]
+    public void ObjectAssertionExample()
+    {
+        //Arrange
+
+        var user = _sut.AppUser;
+
+        var excepted = new User()
+        {
+            FullName = "Halil Ýbrahim CIRITCI",
+            Age = 31,
+            DateOfBirt = new(1993, 01, 07)
+        };
+
+        //Assert
+        user.Should().BeEquivalentTo(excepted);
+        user.FullName.Should().Be(excepted.FullName);
+        user.Age.Should().Be(excepted.Age);
+    }
+
+    [Fact]
+    public void ListAsserionExample()
+    {
+        //Arrange
+        var users = _sut.Users;
+        var excepted = new List<User>()
+        {
+             new User()
+        {
+            FullName="Halil Ýbrahim CIRITCI",
+            Age = 31,
+            DateOfBirt=new(1993,01,07)
+        },
+
+           new User()
+        {
+            FullName="Hasan CIRITCI",
+            Age = 67,
+            DateOfBirt=new(1957,01,15)
+        }
+
+        };
+
+        users.Should().BeEquivalentTo(excepted);
+        users.Should().HaveCount(2);
+        users.First().FullName.Should().Be(excepted.First().FullName);
+    }
 }
