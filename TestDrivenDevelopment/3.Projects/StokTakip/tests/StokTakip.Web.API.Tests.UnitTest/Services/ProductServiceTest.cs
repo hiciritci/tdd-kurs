@@ -57,4 +57,11 @@ public sealed class ProductServiceTest : IClassFixture<ProductService>
         exc.Which.Errors.Should().HaveCount(1);
         exc.Which.Errors.First().ErrorMessage.Should().Be("Stok adedi 0 dan büyük olmalıdır");
     }
+
+    [Fact]
+    public async Task Create_Should_Throw_ArgumentException_if_Name_Already_Exists()
+    {
+        CreateProductDto request = new("Bilgisayar", 1, 1);
+
+    }
 }
