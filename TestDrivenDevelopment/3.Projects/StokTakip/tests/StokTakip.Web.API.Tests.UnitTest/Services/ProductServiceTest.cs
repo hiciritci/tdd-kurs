@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Bogus;
 using FluentAssertions;
 using GenericRepository;
 using NSubstitute;
@@ -21,7 +20,7 @@ public sealed class ProductServiceTest
         ProductService productService = new(productRepository, unitofWork, mapper);
         CreateProductDto request = new("HC", 1, 1);
 
-        Faker<CreateProductDto> faker = new Faker<CreateProductDto>().RuleFor(p => p.Name, f => f.Commerce.ProductName()).RuleFor(p => p.Price, f => Convert.ToDecimal(f.Commerce.Price(1, 1000, 2)));
+        //Faker<CreateProductDto> faker = new Faker<CreateProductDto>().RuleFor(p => p.Name, f => f.Commerce.ProductName()).RuleFor(p => p.Price, f => Convert.ToDecimal(f.Commerce.Price(1, 1000, 2)));
 
         //  var request1 = faker.Generate();
 
@@ -31,7 +30,10 @@ public sealed class ProductServiceTest
         var action = async () => await productService.CreateAsync(request, default);
         /// Assert
 
-        await action.Should().ThrowAsync<ValidationException>();
+        var exception = await action.Should().ThrowAsync<ValidationException>();
+        exception.Which.Errors.Should().HaveCount(1);
+        exception.Which.Errors.First().ErrorMessage.Should().Be("Ürün adı en az 3 karakter olmalıdır");
+
 
     }
 }
