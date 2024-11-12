@@ -1,5 +1,6 @@
+﻿using AutoFixture;
+using Bogus;
 using FluentAssertions;
-
 namespace TestingTechniques.Tests.UnitTest;
 
 public class ValueSamplesTest
@@ -19,7 +20,7 @@ public class ValueSamplesTest
 
         //Assert
 
-        fullName.Should().Be("Halil �brahim CIRITCI");
+        fullName.Should().Be("Halil İbrahim CIRITCI");
         fullName.Should().NotBeEmpty();
         fullName.Should().StartWith("Ha");
         fullName.Should().EndWith("I");
@@ -54,12 +55,20 @@ public class ValueSamplesTest
     public void ObjectAssertionExample()
     {
         //Arrange
+        Fixture fixture = new();
+        //automatik model den nesne olusturuyor fakat anlamlı bir sonuc üretmiyor.
+        var user2 = fixture.Create<User>();
+
+        /// bu da auto dolduryor veriler daha amantıklı geliyor. Örnegin ad-soyad verileri gercekci.
+        Faker faker = new();
+
+        //User2 user3 = faker.Generate();
 
         var user = _sut.AppUser;
 
         var excepted = new User()
         {
-            FullName = "Halil �brahim CIRITCI",
+            FullName = "Halil İbrahim CIRITCI",
             Age = 31,
             DateOfBirt = new(1993, 01, 07)
         };
@@ -79,7 +88,7 @@ public class ValueSamplesTest
         {
              new User()
         {
-            FullName="Halil �brahim CIRITCI",
+            FullName="Halil İbrahim CIRITCI",
             Age = 31,
             DateOfBirt=new(1993,01,07)
         },
