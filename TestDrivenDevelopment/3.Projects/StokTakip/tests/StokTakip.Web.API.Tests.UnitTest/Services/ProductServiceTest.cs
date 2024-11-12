@@ -8,8 +8,15 @@ using StokTakip.WebAPI.Services;
 using ValidationException = FluentValidation.ValidationException;
 
 namespace StokTakip.Web.API.Tests.UnitTest.Services;
-public sealed class ProductServiceTest
+public sealed class ProductServiceTest : IClassFixture<ProductService>
 {
+    private readonly ProductService productService;
+
+    public ProductServiceTest(ProductService fix)
+    {
+        productService = fix;
+    }
+
     [Fact]
     public async Task Create_Should_Throw_ValidationException_If_Name_Less_Then_3_Characters()
     {
@@ -33,7 +40,21 @@ public sealed class ProductServiceTest
         var exception = await action.Should().ThrowAsync<ValidationException>();
         exception.Which.Errors.Should().HaveCount(1);
         exception.Which.Errors.First().ErrorMessage.Should().Be("Ürün adı en az 3 karakter olmalıdır");
+    }
+    [Fact]
+    public async Task Create_Should_Throw_ValidationException_If_Stock_Is_Zero()
+    {
+        var prodRepo = Substitute.For<IProductRepository>();
+        var unit = Substitute.For<IUnitOfWork>();
+        var map = Substitute.For<IMapper>();
+
+        ProductService productService = new(prodRepo, unit, map);
+        CreateProductDto res = new("adi", 0, 1);
+        var act = async () => await productService.CreateAsync(res, default);
 
 
+        var exc = await act.Should().ThrowAsync<ValidationException>();
+        exc.Which.Errors.Should().HaveCount(1);
+        exc.Which.Errors.First().ErrorMessage.Should().Be("Stok adedi 0 dan büyük olmalıdır");
     }
 }
