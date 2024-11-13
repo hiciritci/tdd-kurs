@@ -14,7 +14,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseInMemoryDatabase("MyDb");
+    options.UseNpgsql("server=localhost;port=5432;database=mydb;USer ID=postgres;Password= 1");
 });
 
 builder.Services.AddScoped<IUnitOfWork>(srv => srv.GetRequiredService<ApplicationDbContext>());

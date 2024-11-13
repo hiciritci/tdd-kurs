@@ -1,6 +1,9 @@
-﻿using FluentAssertions;
+﻿using System.Linq.Expressions;
+using FluentAssertions;
 using FluentValidation;
+using NSubstitute;
 using StokTakip.WebAPI.Dtos;
+using StokTakip.WebAPI.Models;
 using StokTakip.WebAPI.Services;
 
 namespace StokTakip.WebAPI.Tests.UnitTest.Services;
@@ -8,44 +11,114 @@ public sealed class ProductServiceUpdateTest : IClassFixture<ProductServiceFixtu
 {
     private readonly ProductServiceFixture _fixture;
     private readonly ProductService _sut;
+    private readonly Guid _id;
+    private readonly UpdateProductDto _request;
+    private readonly Product _excepted;
+    private readonly Product _product;
+
+
 
     public ProductServiceUpdateTest(ProductServiceFixture fixture)
     {
-        _fixture = fixture;
         _sut = fixture.productService;
+        _fixture = fixture;
+        _id = Guid.Parse("c846b41a-c127-44c7-b1ae-439defc42767");
+        _request = new(_id, "Bilgisayar", 1, 1);
+        _excepted = new()
+        {
+            Id = _id,
+            Name = "Bilgisayar",
+            Stock = 1,
+            Price = 1
+        };
+        _product = new()
+        {
+            Id = _id,
+            Name = "Computer",
+            Stock = 1,
+            Price = 1
+        };
     }
 
     [Fact]
-    public async Task Update_Should_Throw_ValitadionException_Id_Name_Less_Than_3_Characters()
+    public async Task Update_Should_Throw_ValidationException_If_Name_Less_Than_3_Characters()
     {
-        //Arrange
-        UpdateProductDto request = new(Guid.NewGuid(), "ab", 1, 1);
+        // Arrange
+        UpdateProductDto request = new(Guid.NewGuid(), "pd", 1, 1);
 
-        //Act
+        // Act
         var action = async () => await _sut.UpdateAsync(request, CancellationToken.None);
-        //Assert
 
+        // Assert
         var exception = await action.Should().ThrowAsync<ValidationException>();
-
         exception.Which.Errors.First().ErrorMessage.Should().Contain("Ürün");
         exception.Which.Errors.Should().HaveCount(1);
-
     }
 
     [Fact]
-    public async Task Update_Should_Throw_ValitadionException_If_Price_Less_Or_Equels_Zero()
+    public async Task Update_Should_Throw_ValidationException_If_Stock_Less_Or_Equal_Zero()
     {
-        //Arrange
-        UpdateProductDto request = new(Guid.NewGuid(), "ab", 1, 0);
+        // Arrange
+        UpdateProductDto request = new(Guid.NewGuid(), "pda", 0, 1);
 
-        //Act
+        // Act
         var action = async () => await _sut.UpdateAsync(request, CancellationToken.None);
-        //Assert
 
+        // Assert
         var exception = await action.Should().ThrowAsync<ValidationException>();
+        exception.Which.Errors.First().ErrorMessage.Should().Contain("Stok");
+        exception.Which.Errors.Should().HaveCount(1);
+    }
 
+    [Fact]
+    public async Task Update_Should_Throw_ValidationException_If_Price_Less_Or_Equal_Zero()
+    {
+        // Arrange
+        UpdateProductDto request = new(Guid.NewGuid(), "pda", 1, 0);
+
+        // Act
+        var action = async () => await _sut.UpdateAsync(request, CancellationToken.None);
+
+        // Assert
+        var exception = await action.Should().ThrowAsync<ValidationException>();
         exception.Which.Errors.First().ErrorMessage.Should().Contain("Birim fiyatı");
         exception.Which.Errors.Should().HaveCount(1);
+    }
+
+    [Fact]
+    public async Task Update_Should_Throw_ArgumentNullException_If_Product_Cannot_Find()
+    {
+        // Arrange
+        Guid id = Guid.Parse("c846b41a-c127-44c7-b1ae-439defc42767");
+        UpdateProductDto request = new(_id, "Bilgisayar", 1, 1);
+
+        // Act
+        var action = async () => await _sut.UpdateAsync(request, default);
+
+        // Assert
+        var exception = await action.Should().ThrowAsync<ArgumentNullException>();
+    }
+
+
+    [Fact]
+    public async Task Update_Should_Throw_ArgumentException_Id_Name_Already_Exists()
+    {
+        // Arrange
+        _fixture.productRepository
+        .FirstOrDefaultAsync(Arg.Any<Expression<Func<Product, bool>>>(), default)
+       .Returns(_product);
+
+        _fixture.productRepository
+        .AnyAsync(Arg.Any<Expression<Func<Product, bool>>>(), default)
+       .Returns(true);
+
+        //Act
+        var action = async () => await _sut.UpdateAsync(_request, default);
+
+        //assert
+
+        var exception = await action.Should().ThrowAsync<ArgumentException>();
+        exception.Which.Message.Should().Be("Ürün adı daha önce kullanılmış");
 
     }
 }
