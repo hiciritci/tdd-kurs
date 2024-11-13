@@ -1,1 +1,9 @@
 https://github.com/TanerSaydam/CB.Academy.Jd.Education
+
+Integration Test
+
+Yeni bir enviromet oluşturulur.
+AspNetCore.mvc.testsing nuget i sanal bir db oluştutur, 
+program.cs den migarationlar tanıtılır. 
+test basladığında db contanierde ayaga kaldırılır, 
+test olarak kayıt yapar testi birince dispose ile db ve contanier silinir.
