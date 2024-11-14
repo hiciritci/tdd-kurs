@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace eTicaret.Domain.Tests.UnitTest;
+namespace eTicaret.Domain.Tests.UnitTests.TestDoubles;
 public sealed class RegisterCommandHandlerTest
 {
     [Fact]
@@ -52,35 +52,4 @@ public sealed class RegisterCommandHandler(IUserRepository userRepository)
             throw new EmailNotUniqueException();
         }
     }
-}
-public interface IUserRepository
-{
-    Task<bool> IsEmailExistsAsync(string email, CancellationToken cancellationToken = default);
-}
-
-public class StubNotuniqeEmailUserRepository : IUserRepository
-{
-    public async Task<bool> IsEmailExistsAsync(string email, CancellationToken cancellationToken = default)
-    {
-        await Task.CompletedTask;
-        return true;
-    }
-}
-
-public class StubUniqeEmailUserRepository : IUserRepository
-{
-    public Task<bool> IsEmailExistsAsync(string email, CancellationToken cancellationToken = default)
-    {
-        return Task.FromResult(false);
-
-    }
-}
-public sealed class EmailNotUniqueException : Exception
-{
-    public EmailNotUniqueException() : base("Mail adresi daha önce kullanılmış")
-    {
-
-    }
-
-    //public implicit operator (Arastırılması gerekiyor güzel bir obje tanımlama)
 }
