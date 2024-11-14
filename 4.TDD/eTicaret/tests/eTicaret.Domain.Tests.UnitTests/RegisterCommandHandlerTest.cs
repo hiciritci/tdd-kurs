@@ -1,35 +1,43 @@
 ﻿using FluentAssertions;
 
-namespace eTicaret.Domain.Tests.UnitTests;
+namespace eTicaret.Domain.Tests.UnitTest;
 public sealed class RegisterCommandHandlerTest
 {
     [Fact]
-    public async Task Register_Should_Throw_Exception_If_Email_Not_Unique()
+    public async Task Register_Should_Throw_EmailNotUniqueException_If_Email_Not_Unique()
     {
-        //Arrange
-
-        RegisterCommand request = new("Halilİbrahim", "CIRITCI", "halil@gmail.com");
+        // Arrange
+        RegisterCommand request = new("Halil", "Ciritci", "hc@gmail.com");
         RegisterCommandHandler handler = new();
-        //Act
 
+        // Act
         var action = async () => await handler.Handle(request, default);
 
-        //Assert 
-        var exception = await action.Should().ThrowAsync<Exception>();
-        exception.Which.Message.Should().Be("Mail adresi daha önce kulanılmış.");
+        // Assert
+        var exception = await action.Should().ThrowAsync<EmailNotUniqueException>();
+        exception.Which.Message.Should().Be("Mail adresi daha önce kullanılmış");
     }
 }
 
 public sealed record RegisterCommand(
-    string Val1,
-    string Val2,
-    string Val3);
+    string FirstName,
+    string LastName,
+    string Email);
 
 public sealed class RegisterCommandHandler
 {
     public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
-        throw new Exception("Mail adresi daha önce kulanılmış.");
+        throw new EmailNotUniqueException();
     }
 }
 
+public sealed class EmailNotUniqueException : Exception
+{
+    public EmailNotUniqueException() : base("Mail adresi daha önce kullanılmış")
+    {
+
+    }
+
+    //public implicit operator
+}
