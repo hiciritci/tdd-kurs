@@ -7,13 +7,14 @@ public sealed class RegisterCommandHandlerTest
     public async Task Register_Should_Throw_Exception_If_Email_Not_Unique()
     {
         //Arrange
+
         RegisterCommand request = new("Halilİbrahim", "CIRITCI", "halil@gmail.com");
         RegisterCommandHandler handler = new();
         //Act
+
         var action = async () => await handler.Handle(request, default);
 
-        //Assert
-
+        //Assert 
         var exception = await action.Should().ThrowAsync<Exception>();
         exception.Which.Message.Should().Be("Mail adresi daha önce kulanılmış.");
     }
