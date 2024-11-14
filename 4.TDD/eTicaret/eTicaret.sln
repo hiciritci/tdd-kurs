@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{177CC4A7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTicaret.Domain.Tests.UnitTests", "tests\eTicaret.Domain.Tests.UnitTests\eTicaret.Domain.Tests.UnitTests.csproj", "{80675E86-622D-4C77-98D2-695E51A06E05}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{51A35857-BDC1-4208-8F0C-33042E15CFB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTicaret.Domain", "src\eTicaret.Domain\eTicaret.Domain.csproj", "{1A2B985B-4399-4DDE-A620-C6BF10B10B11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,17 @@ Global
 		{80675E86-622D-4C77-98D2-695E51A06E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80675E86-622D-4C77-98D2-695E51A06E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80675E86-622D-4C77-98D2-695E51A06E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A2B985B-4399-4DDE-A620-C6BF10B10B11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A2B985B-4399-4DDE-A620-C6BF10B10B11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A2B985B-4399-4DDE-A620-C6BF10B10B11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A2B985B-4399-4DDE-A620-C6BF10B10B11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{80675E86-622D-4C77-98D2-695E51A06E05} = {177CC4A7-2C37-4C21-A926-F26E1BA7FF3B}
+		{1A2B985B-4399-4DDE-A620-C6BF10B10B11} = {51A35857-BDC1-4208-8F0C-33042E15CFB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BCF4E938-E928-431D-811F-BE294160E472}

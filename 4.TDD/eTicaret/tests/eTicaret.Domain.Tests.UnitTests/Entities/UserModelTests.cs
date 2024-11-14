@@ -1,5 +1,6 @@
-﻿using FluentAssertions;
-namespace eTicaret.Domain.Tests.UnitTests;
+﻿using eTicaret.Domain.Entities;
+using FluentAssertions;
+namespace eTicaret.Domain.Tests.UnitTests.Entities;
 public sealed class UserModelTests
 {
     [Fact]
@@ -27,16 +28,5 @@ public sealed class UserModelTests
 
         //Assert
         action.Should().NotThrow<Exception>();
-    }
-}
-public sealed class User
-{
-    public void SetName(string firtname)
-    {
-        if (firtname.Length < 3)
-        {
-            throw new Exception();
-        }
-
     }
 }
