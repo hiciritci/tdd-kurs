@@ -7,3 +7,14 @@ AspNetCore.mvc.testsing nuget i sanal bir db oluştutur,
 program.cs den migarationlar tanıtılır. 
 test basladığında db contanierde ayaga kaldırılır, 
 test olarak kayıt yapar testi birince dispose ile db ve contanier silinir.
+
+
+nick chapsas : Youtube mid-senior seviye gelişimden haber almak için.
+
+ardalis : Youtube  Advance seviye
+
+amichai mantinband : Youtube  microsoft teams yazılımcısı.
+
+gui ferreira : Youtube tdd anlatıyor.
+
+
