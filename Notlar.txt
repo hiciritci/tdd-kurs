@@ -1,5 +1,5 @@
 https://github.com/TanerSaydam/CB.Academy.Jd.Education
-
+docker compose up -d (docker da postgres ayağa kaldırma komutu. docker yml dosyasının olduğu yerde powershell açılır. bu komut çalıştırlır.)
 Integration Test
 
 Yeni bir enviromet oluşturulur.
