@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-
 namespace eTicaret.Domain.Tests.UnitTests;
 public sealed class UserModelTests
 {
@@ -8,6 +7,7 @@ public sealed class UserModelTests
     {
         //Arrange
         User user = new();
+
         //Act
         var action = () => user.SetName("Ha");
 
@@ -21,19 +21,22 @@ public sealed class UserModelTests
     {
         //Arrange
         User user = new();
+
         //Act
         var action = () => user.SetName("Halil");
 
-
         //Assert
         action.Should().NotThrow<Exception>();
-
     }
 }
 public sealed class User
 {
-    public void SetName(string val)
+    public void SetName(string firtname)
     {
-        throw new Exception();
+        if (firtname.Length < 3)
+        {
+            throw new Exception();
+        }
+
     }
 }
