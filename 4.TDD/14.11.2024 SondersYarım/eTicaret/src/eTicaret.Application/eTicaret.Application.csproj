@@ -11,8 +11,4 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\eTicaret.Domain\eTicaret.Domain.csproj" />
-  </ItemGroup>
-
 </Project>
