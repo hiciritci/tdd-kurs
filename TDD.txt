@@ -1,0 +1,2 @@
+Test list
+--create user metodum olsun bu metoda user ile ilgili name alanı 2 karakter gönderdiğimde hata fırlat..
