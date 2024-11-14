@@ -24,6 +24,7 @@ public sealed class UserModelTests
         //Act
         var action = () => user.SetName("Halil");
 
+
         //Assert
         action.Should().NotThrow<Exception>();
 
