@@ -22,6 +22,8 @@ xUnitTest : Kod parçacıklarını kontrol eder.
 IntegrationTest : Enpoint test eder. Simüle edilmez.
 Bogus kütüphanesi Fake veri üretir.
 
+
+appsetting json da logging default seviyeleri vardır. debug,information,warning,error,fatal? loglama performansı etkiler.
 MSSQL indirmek için
 
 https://hub.docker.com/
@@ -30,6 +32,8 @@ https://hub.docker.com/
 impilict operator
 
 
+
+Ulid Kütüphanesi Guid e benzerdir. Sıralanabilir. Guid e göre biraz daha ağırdır.
 14.11.2024 tarinde sabah ilk saatlerde klima açılırken swing özelliği kumanda ile çalışmayınca 
 yunus 'Hocam kuyruğa aldı heralde' dedi. Yazılımcı esprisi yaparak
 büyük takdir topladı. Burak bey ayrıca tebrik edip elini sıktı.
