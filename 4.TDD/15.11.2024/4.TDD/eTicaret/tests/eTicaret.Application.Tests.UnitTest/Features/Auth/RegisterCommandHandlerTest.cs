@@ -53,19 +53,20 @@ public sealed class RegisterCommandHandlerTest
         // Assert
         response.Should().BeEquivalentTo(expected);
     }
+
     [Fact]
     public async Task Register_Should_Return_User_If_Email_Is_Unique_And_Convert_Is_Successful()
     {
-        //arrange
+        // Arrange
         RegisterCommand request = new("Taner", "Saydam", "tanersaydam@gmail.com");
         User expected = new(request.FirstName, request.LastName, request.Email);
         IUserRepository userRepository = new StubUniqueEmailUserRepository();
         RegisterCommandHandler handler = new(userRepository);
 
-
-        //Act
+        // Act
         var response = await handler.Handle(request, default);
-        //Assert
+
+        // Assert
         response.Should().BeEquivalentTo(expected);
     }
 

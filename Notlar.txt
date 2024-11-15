@@ -18,6 +18,14 @@ amichai mantinband : Youtube  microsoft teams yazılımcısı.
 gui ferreira : Youtube tdd anlatıyor.
 
 
+xUnitTest : Kod parçacıklarını kontrol eder.
+IntegrationTest : Enpoint test eder. Simüle edilmez.
+Bogus kütüphanesi Fake veri üretir.
+
+MSSQL indirmek için
+
+https://hub.docker.com/
+
 
 impilict operator
 
