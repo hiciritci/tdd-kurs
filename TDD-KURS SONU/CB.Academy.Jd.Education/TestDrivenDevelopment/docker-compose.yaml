@@ -1,0 +1,22 @@
+services:
+  postgresDb:
+    image: postgres:latest
+    ports: 
+    - 5432:5432
+    container_name: postgredb
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=1
+    - POSTGRES_DB=mydb
+    - POSTGRES_HOST_AUTH_METHOD=trust
+
+  mssqlDb:
+    image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
+    ports:
+    - 1433:1433
+    environment:
+    - ACCEPT_EULA=Y
+    - MSSQL_SA_PASSWORD=Example#123
+    - MSSQL_PID=Evaluation
+    container_name: sqlpreview
+    hostname: sqlpreview
